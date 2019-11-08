@@ -6,6 +6,17 @@
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
         ctx.fillRect(20, 20, 150, 100);
+        myCanvas.onclick = function(){drawCircle};
+        function drawCircle(){
+        var X = event.clientX; 
+        var Y = event.clientY; 
+        var R = 15;
+        ctx.beginPath();
+        ctx.arc(X, Y, R, 0, 2 * Math.PI, false);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#FF0000';
+        ctx.stroke();
+        }
     </script>
         <p>My favorite color is red.</p>
     </body>
