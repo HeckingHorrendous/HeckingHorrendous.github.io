@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html>
+<head>
+<title>my page</title>
+<style type="text/css">
+canvas{
+	border:1px solid black
+}
+</style>
+</head>
       <body>
-		<canvas id="myCanvas" width="200" height="200" style="border:1px solid">
-			Your browser does not support the HTML5 canvas tag.
-		</canvas>
-        <script>
-window.alert(5 + 6);
-	//canvas.addEventListener('mousedown',drawCircle);
+		<canvas id="a" width="800" height="500"></canvas>
+        <script type="text/javascript">
+var md = false;
+var canvas = document.getElementById('a');
+canvas.addEventListener('mousedown', down);
+canvas.addEventListener('mouseup', toggledraw);
+canvas.addEventListener('mousemove',
+	function(evt){
+		var mousePos = getMousePos(canvas, evt);
+var posx = mousePos.x;
+var posy = mousePos.y;
+draw(canvas, posx, posy);
 
-			document.getElementById("myCanvas").onmousedown = function() {drawCircle()};
-
-			function drawCircle(){
-
-				var c = document.getElementById("myCanvas");
-				var ctx = c.getContext("2d");
-				ctx.fillStyle = "#92B901";
-var x = event.clientX;     // Get the horizontal coordinate
-var y = event.clientY;     // Get the vertical coordinate
-				ctx.fillRect(x-12, y-12, 8, 8);
-				
-			}
+	});
+	
+	function down(){
+		md = true;
+	}
+	function toggledraw(){
+		md = false;
+	}
+	function getMousePos(canvas, evt){
+		var rect = canvas.getBoundingClientRect();
+		return{
+			x:evt.clientX - rect.left,
+			y:evt.clientY - rect.top
+		};
+	}
+	function draw(canvas, posx, posy){
+		var context = canvas.getContext('2d');
+		if(md){
+			context.fillRect(posx, posy, 4, 4);
+		}
+	}
     	
         </script>
-      
-    </body>
+      </body>
+    
 </html>
